@@ -1,5 +1,7 @@
 # Roadmap
 
+## Core
+
 | Feature                   | Status |
 |---------------------------|--------|
 | Tasks                     | ⌛    |
@@ -7,3 +9,13 @@
 | Task Caching              | ⌛    |
 | Plugins                   | ⌛    |
 | Dependency Graph          | ⌛    |
+
+## Integrations
+
+| Feature                   | Status |
+|---------------------------|--------|
+| NPM                       | ⌛    |
+| Go                        | ⌛    |
+| Cargo                     | ⌛    |
+| Java                      | ⌛    |
+| Python                    | ⌛    |

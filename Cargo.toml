@@ -8,8 +8,12 @@ version = "0.0.0"
 edition = "2024"
 license = "MIT"
 readme = "README.md"
+publish = false
 documentation = "https://www.github.com/aacebo/mx"
 homepage = "https://www.github.com/aacebo/mx"
 repository = "https://www.github.com/aacebo/mx"
 
 [workspace.dependencies]
+mx-core = { path = "./mx-core", version = "0.0.0" }
+
+serde = { version = "1" }

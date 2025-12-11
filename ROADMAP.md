@@ -10,6 +10,8 @@
 | Plugins                   | ⌛    |
 | Dependency Graph          | ⌛    |
 | Nested MX Project Support | ⌛    |
+| Dependency Inference      | ⌛    |
+| Project Inference         | ⌛    |
 
 ## Integrations
 

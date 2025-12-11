@@ -9,6 +9,7 @@
 | Task Caching              | ⌛    |
 | Plugins                   | ⌛    |
 | Dependency Graph          | ⌛    |
+| Nested MX Project Support | ⌛    |
 
 ## Integrations
 

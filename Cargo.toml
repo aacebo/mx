@@ -16,5 +16,7 @@ repository = "https://www.github.com/aacebo/mx"
 [workspace.dependencies]
 mx-cli = { path = "./mx-cli", version = "0.0.0" }
 mx-core = { path = "./mx-core", version = "0.0.0" }
+mx-context = { path = "./mx-context", version = "0.0.0" }
+mx-error = { path = "./mx-error", version = "0.0.0" }
 
 serde = { version = "1" }

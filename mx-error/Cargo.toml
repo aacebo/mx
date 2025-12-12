@@ -1,0 +1,13 @@
+[package]
+name = "mx-error"
+description = "common error implementations."
+readme = "README.md"
+publish = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+documentation.workspace = true
+homepage.workspace = true
+repository.workspace = true
+
+[dependencies]

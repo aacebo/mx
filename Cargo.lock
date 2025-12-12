@@ -10,11 +10,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "mx-context"
+version = "0.0.0"
+dependencies = [
+ "mx-error",
+]
+
+[[package]]
 name = "mx-core"
 version = "0.0.0"
 dependencies = [
  "serde",
 ]
+
+[[package]]
+name = "mx-error"
+version = "0.0.0"
 
 [[package]]
 name = "proc-macro2"

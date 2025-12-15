@@ -1,8 +1,8 @@
 mod iter;
-mod key;
+mod segment;
 
 pub use iter::*;
-pub use key::*;
+pub use segment::*;
 
 use std::collections::VecDeque;
 
@@ -14,7 +14,7 @@ macro_rules! path {
 }
 
 #[derive(Debug, Default, Clone, PartialEq)]
-pub struct Path(VecDeque<Key>);
+pub struct Path(VecDeque<Segment>);
 
 impl Path {
     pub fn new() -> Self {
@@ -25,16 +25,16 @@ impl Path {
         return self.0.len();
     }
 
-    pub fn first(&self) -> Option<&Key> {
+    pub fn first(&self) -> Option<&Segment> {
         return self.0.front();
     }
 
-    pub fn last(&self) -> Option<&Key> {
+    pub fn last(&self) -> Option<&Segment> {
         return self.0.back();
     }
 
-    pub fn push(&mut self, key: Key) -> &mut Self {
-        self.0.push_back(key);
+    pub fn push(&mut self, segment: Segment) -> &mut Self {
+        self.0.push_back(segment);
         return self;
     }
 
@@ -48,7 +48,7 @@ impl Path {
     }
 
     pub fn split(&self, index: usize) -> (Self, Self) {
-        let mut left: VecDeque<Key> = self.0.clone();
+        let mut left: VecDeque<Segment> = self.0.clone();
         let right = left.split_off(index);
         (Path::from(left), Path::from(right))
     }
@@ -56,44 +56,44 @@ impl Path {
 
 impl From<&str> for Path {
     fn from(value: &str) -> Self {
-        let mut keys = VecDeque::new();
+        let mut segments = VecDeque::new();
 
         for part in value.split("/") {
             if part.is_empty() {
                 continue;
             }
 
-            keys.push_back(Key::from(part));
+            segments.push_back(Segment::from(part));
         }
 
-        Self(keys)
+        Self(segments)
     }
 }
 
 impl From<String> for Path {
     fn from(value: String) -> Self {
-        let mut keys = VecDeque::new();
+        let mut segments = VecDeque::new();
 
         for part in value.split("/") {
             if part.is_empty() {
                 continue;
             }
 
-            keys.push_back(Key::from(part));
+            segments.push_back(Segment::from(part));
         }
 
-        Self(keys)
+        Self(segments)
     }
 }
 
-impl From<Vec<Key>> for Path {
-    fn from(value: Vec<Key>) -> Self {
+impl From<Vec<Segment>> for Path {
+    fn from(value: Vec<Segment>) -> Self {
         Self(VecDeque::from(value))
     }
 }
 
-impl From<VecDeque<Key>> for Path {
-    fn from(value: VecDeque<Key>) -> Self {
+impl From<VecDeque<Segment>> for Path {
+    fn from(value: VecDeque<Segment>) -> Self {
         Self(value)
     }
 }
@@ -102,8 +102,8 @@ impl std::fmt::Display for Path {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "/")?;
 
-        for (i, key) in self.iter().enumerate() {
-            write!(f, "{}", key)?;
+        for (i, segment) in self.iter().enumerate() {
+            write!(f, "{}", segment)?;
 
             if i < self.0.len() - 1 {
                 write!(f, "/")?;
@@ -121,7 +121,7 @@ impl PartialEq<&str> for Path {
 }
 
 impl std::ops::Index<usize> for Path {
-    type Output = Key;
+    type Output = Segment;
 
     fn index(&self, index: usize) -> &Self::Output {
         self.0.index(index)

@@ -1,4 +1,4 @@
-use super::{Key, Path};
+use super::{Path, Segment};
 
 #[derive(Debug, Clone)]
 pub struct Iter<'a> {
@@ -21,9 +21,9 @@ impl<'a> Iter<'a> {
         right
     }
 
-    pub fn seek(&mut self, key: &Key) -> Option<usize> {
-        while let Some(k) = self.next() {
-            if k == key {
+    pub fn seek(&mut self, segment: &Segment) -> Option<usize> {
+        while let Some(v) = self.next() {
+            if v == segment {
                 self.index -= 1;
                 return Some(self.index);
             }
@@ -43,7 +43,7 @@ impl<'a> From<&'a Path> for Iter<'a> {
 }
 
 impl<'a> Iterator for Iter<'a> {
-    type Item = &'a Key;
+    type Item = &'a Segment;
 
     fn next(&mut self) -> Option<Self::Item> {
         let item = self.inner.0.get(self.index);
@@ -60,8 +60,8 @@ mod test {
     pub fn should_iterate_path() {
         let path = path!(/a/b/c);
 
-        for (i, key) in path.iter().enumerate() {
-            debug_assert_eq!(key, &path[i]);
+        for (i, segment) in path.iter().enumerate() {
+            debug_assert_eq!(segment, &path[i]);
         }
     }
 
@@ -70,7 +70,7 @@ mod test {
         let path = path!(/a/b/1/c/d/e);
         let mut iter = path.iter();
 
-        debug_assert_eq!(iter.seek(&crate::path::Key::from(1)), Some(2));
+        debug_assert_eq!(iter.seek(&crate::path::Segment::from(1)), Some(2));
         debug_assert_eq!(iter.index(), 2);
         debug_assert_eq!(iter.left(), path!(/a/b), "{}", iter.left().to_string());
         debug_assert_eq!(

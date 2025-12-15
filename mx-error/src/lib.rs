@@ -1,9 +1,11 @@
 mod dynamic;
 mod list;
+mod not_found;
 mod text;
 
 pub use dynamic::*;
 pub use list::*;
+pub use not_found::*;
 pub use text::*;
 
 pub trait AsError {
@@ -21,6 +23,7 @@ pub enum Error {
     Text(TextError),
     List(ListError),
     Dyn(DynError),
+    NotFound(NotFoundError),
 }
 
 impl std::fmt::Display for Error {
@@ -29,6 +32,7 @@ impl std::fmt::Display for Error {
             Self::Text(err) => write!(f, "{}", err),
             Self::List(err) => write!(f, "{}", err),
             Self::Dyn(err) => write!(f, "{}", err),
+            Self::NotFound(err) => write!(f, "{}", err),
         }
     }
 }
@@ -39,6 +43,7 @@ impl std::error::Error for Error {
             Self::Text(err) => err.source(),
             Self::List(err) => err.source(),
             Self::Dyn(err) => err.source(),
+            Self::NotFound(err) => err.source(),
         }
     }
 }

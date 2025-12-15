@@ -54,7 +54,7 @@ impl<'a> Iterator for Iter<'a> {
 
 #[cfg(test)]
 mod test {
-    use crate::prelude::*;
+    use crate::path;
 
     #[test]
     pub fn should_iterate_path() {

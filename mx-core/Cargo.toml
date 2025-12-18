@@ -12,4 +12,5 @@ repository.workspace = true
 
 [dependencies]
 serde = { workspace = true, features = ["derive"] }
+serde-saphyr = { version = "0.0.11" }
 mx-error = { workspace = true }

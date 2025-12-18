@@ -1,5 +1,3 @@
-mod plugin;
 mod project;
 
-pub use plugin::*;
 pub use project::*;

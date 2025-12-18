@@ -2,7 +2,7 @@ use clap::Parser;
 use mx_error::Result;
 
 #[derive(Debug, Parser)]
-#[command(author, version, about = "build one or more projects")]
+#[command(author, version, about = "list projects")]
 pub struct Cmd {
     path: Option<String>,
 }
@@ -17,7 +17,6 @@ impl Cmd {
 
     pub fn run(&self) -> Result<()> {
         println!("hello, world! {:#?}", self);
-        println!("{}", self.path());
         Ok(())
     }
 }

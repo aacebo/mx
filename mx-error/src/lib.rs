@@ -1,12 +1,16 @@
+mod bad_request;
 mod dynamic;
 mod list;
 mod not_found;
 mod text;
 
+pub use bad_request::*;
 pub use dynamic::*;
 pub use list::*;
 pub use not_found::*;
 pub use text::*;
+
+pub type Result<T> = std::result::Result<T, Error>;
 
 pub trait AsError {
     fn as_error(&self) -> &dyn std::error::Error;
@@ -24,6 +28,7 @@ pub enum Error {
     List(ListError),
     Dyn(DynError),
     NotFound(NotFoundError),
+    BadRequest(BadRequestError),
 }
 
 impl std::fmt::Display for Error {
@@ -33,6 +38,7 @@ impl std::fmt::Display for Error {
             Self::List(err) => write!(f, "{}", err),
             Self::Dyn(err) => write!(f, "{}", err),
             Self::NotFound(err) => write!(f, "{}", err),
+            Self::BadRequest(err) => write!(f, "{}", err),
         }
     }
 }
@@ -44,6 +50,7 @@ impl std::error::Error for Error {
             Self::List(err) => err.source(),
             Self::Dyn(err) => err.source(),
             Self::NotFound(err) => err.source(),
+            Self::BadRequest(err) => err.source(),
         }
     }
 }
